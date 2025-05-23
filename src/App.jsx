@@ -9,10 +9,15 @@ function App() {
   if (!API) console.error("Variável VITE_API_URL não definida!");
 
   useEffect(() => {
-    fetch(`${API}/buildingwings`)
-      .then(res => res.json())
-      .then(data => setWings(data));
-  }, []);
+  console.log("Chamando API:", `${API}/buildingwings`);
+  fetch(`${API}/buildingwings`)
+    .then(res => res.json())
+    .then(data => {
+      console.log("Resposta da API:", data);
+      setWings(data);
+    })
+    .catch(err => console.error("Erro ao buscar wings:", err));
+}, []);
 
   const handleSubmit = e => {
     e.preventDefault();
